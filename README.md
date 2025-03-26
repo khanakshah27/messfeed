@@ -152,8 +152,4 @@ PUT /admin/feedback/1
 
 
 
-## 📩 Contact
-🔹 **Developer**: Your Name  
-🔹 **Email**: your.email@example.com  
-🔹 **GitHub**: [your-repo](https://github.com/your-repo)  
 
