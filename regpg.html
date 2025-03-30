@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MessFeed - Feedback Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: 3A4694;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #cfdde6f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-radius: 10px;
+            max-width: 80%;
+            margin: 20px auto 0 auto;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 1rem;
+        }
+
+        .signout {
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-family: 'Times New Roman', serif;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            color: white;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        .btn {
+            background-color: #1a237e;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #283593;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo"><strong>MessFeed</strong></div>
+        <div>
+            <a href="#">Home</a>
+            <a href="#">Browse Reviews</a>
+            <a href="#">FAQ</a>
+            <a href="#">About Us</a>
+        </div>
+        <button class="signout">Sign Out</button>
+    </div>
+
+    <div class="container">
+        <h1>Your Voice, Your Mess: Share Your Feedback</h1>
+        <p>Please enter your details</p>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Registration Number</label>
+                <input type="text" placeholder="Registration Number" value="23BCBXXXX">
+            </div>
+            <div class="form-group">
+                <label>Name Of Mess</label>
+                <input type="text" placeholder="Name Of Mess" value="xxxxxxxxxxxxx">
+            </div>
+            <div class="form-group">
+                <label>Student Full Name</label>
+                <input type="text" placeholder="Student Full Name" value="xxxxxxx xxxxxx">
+            </div>
+            <div class="form-group">
+                <label>Type Of Mess</label>
+                <select>
+                    <option value="">Type Of Mess</option>
+                    <option>Value</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Choose your block</label>
+                <select>
+                    <option value="">Choose your block</option>
+                    <option>Value</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Choose category</label>
+                <select>
+                    <option value="">Choose category</option>
+                    <option>Value</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Room Number</label>
+                <input type="text" placeholder="Room Number" value="xxx">
+            </div>
+            <div class="form-group">
+                <a href="feedback.html" style="text-decoration: none;">
+                    <button class="btn">Write Feedback</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
