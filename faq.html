@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - MessFeed</title>
+    <style>
+        body {
+            background-color: #3A4694;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        .navbar {
+            background-color: #cfdde6f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-radius: 10px;
+            max-width: 80%;
+            margin: 20px auto;
+            color: black;
+        }
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .faq-container {
+            max-width: 70%;
+            margin: 40px auto;
+            text-align: left;
+        }
+        .faq-item {
+            background-color: #5A68B3;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #72856D;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo"><strong>MessFeed</strong></div>
+        <div>
+            <a href="#">View Feedbacks by Category</a>
+            <a href="admin_home2.html">Home</a>
+            <a href="#">About Us</a>
+        </div>
+        <button class="signout">Sign Out</button>
+    </div>
+    
+    <div class="faq-container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item" onclick="toggleAnswer(1)">
+            <strong>How do I submit a feedback?</strong>
+            <div class="faq-answer" id="answer1">Go to the 'Submit Feedback' section and fill out the form.</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(2)">
+            <strong>How long does it take to resolve a feedback?</strong>
+            <div class="faq-answer" id="answer2">It depends on the issue, but we strive to resolve complaints within 48 hours.</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(3)">
+            <strong>Can I edit my submitted feedback?</strong>
+            <div class="faq-answer" id="answer3">No, but you can submit an updated feedback mentioning the previous one.</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(4)">
+            <strong>Who can view my feedback?</strong>
+            <div class="faq-answer" id="answer4">Only the admin and authorized personnel can view your feedback.</div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleAnswer(id) {
+            var answer = document.getElementById('answer' + id);
+            if (answer.style.display === "none" || answer.style.display === "") {
+                answer.style.display = "block";
+            } else {
+                answer.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
