@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "your_username";
 $password = "your_password";
-$dbname = "messfeed_db";
+$dbname = "dbt.sql";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
