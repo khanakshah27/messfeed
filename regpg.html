@@ -14,40 +14,64 @@
         }
 
         body {
-            background-color: 3A4694;
+            background: linear-gradient(135deg, #4a5bb8, #3a4694);
             min-height: 100vh;
+            padding: 20px;
         }
 
         .navbar {
-            background-color: #cfdde6f7;
+            background-color: rgba(207, 221, 230, 0.95);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            border-radius: 10px;
-            max-width: 80%;
-            margin: 20px auto 0 auto;
+            border-radius: 15px;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 2rem;
         }
 
         .navbar a {
             text-decoration: none;
-            color: #333;
-            margin: 0 1rem;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #3f51b5;
         }
 
         .signout {
             background-color: #3f51b5;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .signout:hover {
+            background-color: #303f9f;
         }
 
         .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             color: white;
         }
 
@@ -55,18 +79,23 @@
             text-align: center;
             margin-bottom: 1rem;
             font-family: 'Times New Roman', serif;
+            font-size: 2.5rem;
+            font-weight: normal;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        p {
+        .subtitle {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 2rem 3rem;
+            margin-bottom: 2rem;
         }
 
         .form-group {
@@ -78,93 +107,187 @@
         .form-group label {
             font-size: 1rem;
             color: white;
+            font-weight: 500;
+            margin-bottom: 8px;
         }
 
         input,
         select {
             width: 100%;
-            padding: 0.8rem;
+            padding: 12px 16px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             background-color: white;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-container {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
         }
 
         .btn {
-            background-color: #1a237e;
+            background: linear-gradient(135deg, #2c3e50, #1a237e);
             color: white;
             border: none;
-            padding: 1rem;
-            border-radius: 4px;
+            padding: 15px 40px;
+            border-radius: 8px;
             cursor: pointer;
-            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .btn:hover {
-            background-color: #283593;
+            background: linear-gradient(135deg, #34495e, #283593);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .btn-container {
+                grid-column: span 1;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="navbar">
-        <div class="logo"><strong>MessFeed</strong></div>
-        <div>
-            <a href="#">Home</a>
-            <a href="#">Browse Reviews</a>
+        <div class="logo">MessFeed</div>
+        <div class="nav-links">
+            <a href="#">Feedback Form</a>
+            <a href="#">My Feedbacks</a>
+            <a href="#">Feedback Report</a>
             <a href="#">FAQ</a>
-            <a href="#">About Us</a>
         </div>
         <button class="signout">Sign Out</button>
     </div>
 
     <div class="container">
         <h1>Your Voice, Your Mess: Share Your Feedback</h1>
-        <p>Please enter your details</p>
+        <p class="subtitle">Please enter your details</p>
+
         <div class="form-grid">
             <div class="form-group">
                 <label>Registration Number</label>
-                <input type="text" placeholder="Registration Number" value="23BCBXXXX">
+                <input type="text" placeholder="Registration Number" value="XXXXXXXXX">
             </div>
+
             <div class="form-group">
                 <label>Name Of Mess</label>
                 <input type="text" placeholder="Name Of Mess" value="xxxxxxxxxxxxx">
             </div>
+
             <div class="form-group">
                 <label>Student Full Name</label>
                 <input type="text" placeholder="Student Full Name" value="xxxxxxx xxxxxx">
             </div>
+
             <div class="form-group">
                 <label>Type Of Mess</label>
                 <select>
                     <option value="">Type Of Mess</option>
-                    <option>Value</option>
+                    <option value="veg">Vegetarian</option>
+                    <option value="non-veg">Non-Vegetarian</option>
+                    <option value="mixed">Special</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label>Choose your block</label>
                 <select>
                     <option value="">Choose your block</option>
-                    <option>Value</option>
+                    <option value="a">Block A</option>
+                    <option value="b">Block B</option>
+                    <option value="c">Block C</option>
+                    <option value="d">Block D</option>
+                    <option value="e">Block E</option>
+                    <option value="ea">Block E Annex</option>
+                    <option value="f">Block F</option>
+                    <option value="g">Block G</option>
+                    <option value="h">Block H</option>
+                    <option value="j">Block J</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label>Choose category</label>
                 <select>
                     <option value="">Choose category</option>
-                    <option>Value</option>
+                    <option value="food-quality">Food Quality</option>
+                    <option value="service">Service</option>
+                    <option value="cleanliness">Cleanliness</option>
+                    <option value="pricing">Pricing</option>
+                    <option value="other">Other</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label>Room Number</label>
                 <input type="text" placeholder="Room Number" value="xxx">
             </div>
-            <div class="form-group">
-                <a href="feedback.html" style="text-decoration: none;">
-                    <button class="btn">Write Feedback</button>
-                </a>
+
+            <div class="btn-container">
+                <button class="btn" onclick="handleWriteFeedback()">Write Feedback</button>
             </div>
         </div>
     </div>
+
+    <script>
+        function handleWriteFeedback() {
+
+            const regNumber = document.querySelector('input[placeholder="Registration Number"]').value;
+            const messName = document.querySelector('input[placeholder="Name Of Mess"]').value;
+            const studentName = document.querySelector('input[placeholder="Student Full Name"]').value;
+            const roomNumber = document.querySelector('input[placeholder="Room Number"]').value;
+
+            if (!regNumber || !messName || !studentName || !roomNumber) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            window.location.href = 'feedback.html';
+        }
+    </script>
 </body>
 
 </html>
