@@ -11,33 +11,15 @@ User Authentication** (Students & Admins)
 Submit Feedback** with categories like Food Quality, Cleanliness, etc.  
 Track Previous Feedback Entries**  
 Admin Dashboard** for Managing Complaints  
-Secure MySQL Database Integration**  
+Secure PostgreSQL Database Integration**  
 
 ---
 
-##Project Structure
-
-```
-/messfeed
-│── /frontend               # Contains HTML, CSS, JavaScript files
-│   ├── index.html          # Login Page
-│   ├── feedback.html       # Feedback Submission Page
-│   ├── my_feedbacks.html   # View Submitted Feedbacks
-│   ├── feedback_report.html # Reports Page
-│   ├── admin_dashboard.html # Admin Panel
-│── /backend                # Node.js & MySQL API
-│   ├── server.js           # Main API logic
-│   ├── database.sql        # MySQL database setup
-│── package.json            # Backend dependencies
-│── README.md               # Documentation
-```
-
----
 
 ##  Tech Stack
 🔹 **Frontend**: HTML, CSS, JavaScript  
 🔹 **Backend**: Node.js, Express.js  
-🔹 **Database**: MySQL  
+🔹 **Database**: PostgreSQL
 🔹 **Authentication**: JWT (JSON Web Token)  
 🔹 **Styling**: Custom CSS  
 
@@ -57,12 +39,10 @@ cd backend
 npm install
 ```
 
-### **3️⃣ Setup MySQL Database**
-- Create a database using `database.sql` script:
-```sh
-mysql -u root -p < database.sql
-```
-- Update **server.js** with your **MySQL credentials**.
+### **3️⃣ Setup PostgreSQL Database**
+- Create a database using `database.sql` script
+  
+- Update **server.js** with your **PostgreSQL credentials**.
 
 ### **4️⃣ Start the Backend Server**
 ```sh
