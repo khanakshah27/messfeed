@@ -7,10 +7,10 @@ MessFeed is a web-based system where students can submit feedback about their me
 ---
 
 ## Features
-User Authentication** (Students & Admins)  
-Submit Feedback** with categories like Food Quality, Cleanliness, etc.  
-Track Previous Feedback Entries**  
-Admin Dashboard** for Managing Complaints  
+User Authentication (Students & Admins)  
+Submit Feedback with categories like Food Quality, Cleanliness, etc.  
+Track Previous Feedback Entries 
+Admin Dashboard for Managing Complaints  
 Secure PostgreSQL Database Integration**  
 
 ---
