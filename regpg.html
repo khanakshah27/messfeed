@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MessFeed - Feedback Form</title>
     <style>
@@ -189,7 +188,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="navbar">
         <div class="logo">MessFeed</div>
@@ -206,88 +204,102 @@
         <h1>Your Voice, Your Mess: Share Your Feedback</h1>
         <p class="subtitle">Please enter your details</p>
 
-        <div class="form-grid">
-            <div class="form-group">
-                <label>Registration Number</label>
-                <input type="text" placeholder="Registration Number" value="XXXXXXXXX">
+        <!-- Feedback Form -->
+        <form id="feedbackForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Registration Number</label>
+                    <input type="text" name="registration_number" placeholder="Registration Number" required>
+                </div>
+                <div class="form-group">
+                    <label>Name Of Mess</label>
+                    <input type="text" name="mess_name" placeholder="Name Of Mess" required>
+                </div>
+                <div class="form-group">
+                    <label>Student Full Name</label>
+                    <input type="text" name="student_name" placeholder="Student Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label>Type Of Mess</label>
+                    <select name="mess_type" required>
+                        <option value="">Type Of Mess</option>
+                        <option value="veg">Vegetarian</option>
+                        <option value="non-veg">Non-Vegetarian</option>
+                        <option value="mixed">Special</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Choose your block</label>
+                    <select name="block" required>
+                        <option value="">Choose your block</option>
+                        <option value="a">Block A</option>
+                        <option value="b">Block B</option>
+                        <option value="c">Block C</option>
+                        <option value="d">Block D</option>
+                        <option value="e">Block E</option>
+                        <option value="ea">Block E Annex</option>
+                        <option value="f">Block F</option>
+                        <option value="g">Block G</option>
+                        <option value="h">Block H</option>
+                        <option value="j">Block J</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Choose category</label>
+                    <select name="category" required>
+                        <option value="">Choose category</option>
+                        <option value="food-quality">Food Quality</option>
+                        <option value="service">Service</option>
+                        <option value="cleanliness">Cleanliness</option>
+                        <option value="pricing">Pricing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input type="text" name="room_no" placeholder="Room Number" required>
+                </div>
+                <div class="form-group">
+                    <label>Write your feedback</label>
+                    <input type="text" name="feedback" placeholder="Feedback" required>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn">Write Feedback</button>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label>Name Of Mess</label>
-                <input type="text" placeholder="Name Of Mess" value="xxxxxxxxxxxxx">
-            </div>
-
-            <div class="form-group">
-                <label>Student Full Name</label>
-                <input type="text" placeholder="Student Full Name" value="xxxxxxx xxxxxx">
-            </div>
-
-            <div class="form-group">
-                <label>Type Of Mess</label>
-                <select>
-                    <option value="">Type Of Mess</option>
-                    <option value="veg">Vegetarian</option>
-                    <option value="non-veg">Non-Vegetarian</option>
-                    <option value="mixed">Special</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Choose your block</label>
-                <select>
-                    <option value="">Choose your block</option>
-                    <option value="a">Block A</option>
-                    <option value="b">Block B</option>
-                    <option value="c">Block C</option>
-                    <option value="d">Block D</option>
-                    <option value="e">Block E</option>
-                    <option value="ea">Block E Annex</option>
-                    <option value="f">Block F</option>
-                    <option value="g">Block G</option>
-                    <option value="h">Block H</option>
-                    <option value="j">Block J</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Choose category</label>
-                <select>
-                    <option value="">Choose category</option>
-                    <option value="food-quality">Food Quality</option>
-                    <option value="service">Service</option>
-                    <option value="cleanliness">Cleanliness</option>
-                    <option value="pricing">Pricing</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Room Number</label>
-                <input type="text" placeholder="Room Number" value="xxx">
-            </div>
-
-            <div class="btn-container">
-                <button class="btn" onclick="handleWriteFeedback()">Write Feedback</button>
-            </div>
-        </div>
+        </form>
     </div>
 
     <script>
-        function handleWriteFeedback() {
-
-            const regNumber = document.querySelector('input[placeholder="Registration Number"]').value;
-            const messName = document.querySelector('input[placeholder="Name Of Mess"]').value;
-            const studentName = document.querySelector('input[placeholder="Student Full Name"]').value;
-            const roomNumber = document.querySelector('input[placeholder="Room Number"]').value;
-
-            if (!regNumber || !messName || !studentName || !roomNumber) {
-                alert('Please fill in all required fields');
-                return;
-            }
-
-            window.location.href = 'feedback.html';
+    document.getElementById('feedbackForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        // For demo, use unauthenticated user_id, or get it from login flow/session if available
+        const feedbackData = {
+            user_id: 1, // Replace with actual logged-in user id in real use!
+            registration_number: formData.get('registration_number'),
+            mess_name: formData.get('mess_name'),
+            student_name: formData.get('student_name'),
+            mess_type: formData.get('mess_type'),
+            block: formData.get('block'),
+            category: formData.get('category'),
+            room_no: formData.get('room_no'),
+            feedback: formData.get('feedback')
+        };
+        const res = await fetch('/api/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(feedbackData)
+        });
+        const response = await res.json();
+        if (res.ok) {
+            alert('Feedback submitted! ID: ' + response.feedback_id);
+        } else {
+            alert(response.message || 'Submission failed');
         }
+    });
     </script>
 </body>
-
 </html>
