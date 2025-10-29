@@ -5,9 +5,6 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from flask_bcrypt import Bcrypt
 
-## pip install flask-cors
-## pip install flask-bcrypt
-## pip install psycopg2-binary
 
 app = Flask(__name__)
 CORS(app)
@@ -21,28 +18,27 @@ def get_db():
         password="root1234"
     )
 
-#home page
-@app.route('/home')
+# Home page
+@app.route('/')
 def home():
     return render_template('landpg.html')
 
-# sign in page
+# Sign in page
 @app.route('/feedlog')
 def feedlog():
     return render_template('feedlog.html')
 
-# feedback page after student login
+# Feedback page after student login
 @app.route('/regpg')
 def regpg():
     return render_template('regpg.html')
 
-# admin login
+# Admin home page
 @app.route('/admin_home2')
 def admin_home2():
     return render_template('admin_home2.html')
 
-
-##### login APIs
+# API: User login
 @app.route('/api/login_user', methods=['POST'])
 def login_user():
     data = request.get_json()
@@ -63,16 +59,15 @@ def login_user():
         if not user:
             return jsonify({"success": False, "message": "User not found"}), 404
 
-        # Check hashed password
         if bcrypt.check_password_hash(user['password'], password):
             return jsonify({"success": True, "redirect": "/regpg"})
         else:
             return jsonify({"success": False, "message": "Invalid password"}), 401
-
+            
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
-
+# API: Admin login
 @app.route('/api/login_admin', methods=['POST'])
 def login_admin():
     data = request.get_json()
@@ -101,7 +96,7 @@ def login_admin():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
-
+# Additional pages
 @app.route('/admin_add_comments')
 def admin_add_comments():
     return render_template('admin_add_comments.html')
@@ -122,7 +117,7 @@ def feedback():
 def feedrep():
     return render_template('feedrep.html')
 
-# Submit feedback
+# API: Submit feedback
 @app.route('/api/feedback', methods=['POST'])
 def submit_feedback():
     data = request.get_json()
@@ -149,6 +144,11 @@ def submit_feedback():
         return jsonify({"message": "Feedback submitted", "feedback_id": feedback_id}), 201
     except Exception as e:
         return jsonify({"message": str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 
 
 
