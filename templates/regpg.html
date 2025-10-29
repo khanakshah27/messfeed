@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MessFeed - Feedback Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4a5bb8, #3a4694);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .navbar {
+            background-color: rgba(207, 221, 230, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-radius: 15px;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #3f51b5;
+        }
+
+        .signout {
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .signout:hover {
+            background-color: #303f9f;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-family: 'Times New Roman', serif;
+            font-size: 2.5rem;
+            font-weight: normal;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-container {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #2c3e50, #1a237e);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #34495e, #283593);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .btn-container {
+                grid-column: span 1;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">MessFeed</div>
+        <div class="nav-links">
+            <a href="feedback.html">Feedback Form</a>
+            <a href="">My Feedbacks</a>
+            <a href="feedrep.html">Feedback Report</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <button class="signout">Sign Out</button>
+    </div>
+
+    <div class="container">
+        <h1>Your Voice, Your Mess: Share Your Feedback</h1>
+        <p class="subtitle">Please enter your details</p>
+
+        <!-- Feedback Form -->
+        <form id="feedbackForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Registration Number</label>
+                    <input type="text" name="registration_number" placeholder="Registration Number" required>
+                </div>
+                <div class="form-group">
+                    <label>Name Of Mess</label>
+                    <input type="text" name="mess_name" placeholder="Name Of Mess" required>
+                </div>
+                <div class="form-group">
+                    <label>Student Full Name</label>
+                    <input type="text" name="student_name" placeholder="Student Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label>Type Of Mess</label>
+                    <select name="mess_type" required>
+                        <option value="">Type Of Mess</option>
+                        <option value="veg">Vegetarian</option>
+                        <option value="non-veg">Non-Vegetarian</option>
+                        <option value="mixed">Special</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Choose your block</label>
+                    <select name="block" required>
+                        <option value="">Choose your block</option>
+                        <option value="a">Block A</option>
+                        <option value="b">Block B</option>
+                        <option value="c">Block C</option>
+                        <option value="d">Block D</option>
+                        <option value="e">Block E</option>
+                        <option value="ea">Block E Annex</option>
+                        <option value="f">Block F</option>
+                        <option value="g">Block G</option>
+                        <option value="h">Block H</option>
+                        <option value="j">Block J</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Choose category</label>
+                    <select name="category" required>
+                        <option value="">Choose category</option>
+                        <option value="food-quality">Food Quality</option>
+                        <option value="service">Service</option>
+                        <option value="cleanliness">Cleanliness</option>
+                        <option value="pricing">Pricing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input type="text" name="room_no" placeholder="Room Number" required>
+                </div>
+                <div class="form-group">
+                    <label>Write your feedback</label>
+                    <input type="text" name="feedback" placeholder="Feedback" required>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn">Write Feedback</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            // For demo, use unauthenticated user_id, or get it from login flow/session if available
+            const feedbackData = {
+                user_id: 1, // Replace with actual logged-in user id in real use!
+                registration_number: formData.get('registration_number'),
+                mess_name: formData.get('mess_name'),
+                student_name: formData.get('student_name'),
+                mess_type: formData.get('mess_type'),
+                block: formData.get('block'),
+                category: formData.get('category'),
+                room_no: formData.get('room_no'),
+                feedback: formData.get('feedback')
+            };
+            const res = await fetch('/api/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(feedbackData)
+            });
+            const response = await res.json();
+            if (res.ok) {
+                alert('Feedback submitted! ID: ' + response.feedback_id);
+            } else {
+                alert(response.message || 'Submission failed');
+            }
+        });
+    </script>
+</body>
+
+</html>

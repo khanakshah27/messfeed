@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Feedbacks by Category</title>
+    <style>
+        body {
+            background-color: #3A4694;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .navbar {
+            background-color: #cfdde6f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-radius: 10px;
+            max-width: 80%;
+            margin: 20px auto;
+            color: black;
+        }
+
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            margin: 20px auto;
+            width: 60%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .filter-options {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .filter-options select {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .recent-feedbacks {
+            background-color: #e1e2e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            max-width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feedback-item {
+            background-color: #3A4694;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .load-more {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo"><strong>MessFeed</strong></div>
+        <div>
+            <a href="admin_home2.html">Home</a>
+            <a href="faq.html">FAQ</a>
+            <a href="#">About Us</a>
+        </div>
+        <a href="landpg.html"><button class="signout">Sign Out</button></a>
+    </div>
+
+    <input type="text" class="search-bar" placeholder="Search feedback...">
+
+    <div class="filter-options">
+        <select>
+            <option>Filter by Date</option>
+            <option>Last 24 Hours</option>
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
+        </select>
+        <select>
+            <option>Filter by Severity</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
+        <select>
+            <option>Filter by Status</option>
+            <option>Pending</option>
+            <option>Resolved</option>
+        </select>
+        <select>
+            <option>Filter by Category</option>
+            <option>Food Quality</option>
+            <option>Cleanliness</option>
+            <option>Service</option>
+            <option>Menu Variety</option>
+            <option>Other Issues</option>
+        </select>
+    </div>
+
+    <div class="recent-feedbacks">
+        <h3>Recent Feedbacks <span style="color:#3A4694;"></span></h3>
+        <div class="feedback-item">"Food quality needs improvement."</div>
+        <div class="feedback-item">"Cleanliness is great, but the trays were missing."</div>
+        <div class="feedback-item">"Service is too slow during peak hours."</div>
+    </div>
+
+    <button class="load-more">Load More</button>
+</body>
+
+</html>
