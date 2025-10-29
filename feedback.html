@@ -113,31 +113,16 @@
             document.getElementById('message').style.display = 'block';
             document.getElementById('feedback').value = '';
 
-            // When you have the PHP backend ready, uncomment this code:
-            /*
-            fetch('submit_feedback.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    feedback: feedback
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('message').style.display = 'block';
-                    document.getElementById('feedback').value = '';
-                } else {
-                    alert('Error submitting feedback. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error submitting feedback. Please try again.');
-            });
-            */
+            async function loadMyFeedbacks(userId) {
+  const res = await fetch(`/api/feedbacks?user_id=${userId}&role=student`);
+  const feedbacks = await res.json();
+  // Render the feedback list on the page
+  console.log(feedbacks);
+}
+
+// Call this when page loads (replace userId with actual logged-in user id)
+loadMyFeedbacks(1);
+
         });
     </script>
 
