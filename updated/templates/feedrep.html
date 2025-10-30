@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Report</title>
+    <style>
+        body {
+            background-color: #2D2A6E;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #cfdde6f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-radius: 10px;
+            max-width: 80%;
+            margin: 20px auto 0 auto;
+        }
+
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .navbar .signout {
+            background-color: transparent;
+            border: 1px solid black;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 80%;
+            margin: 120px auto;
+            text-align: left;
+            background-color: #82a5baf7;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #B0A9D6;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .pending {
+            background-color: orange;
+            color: white;
+        }
+
+        .reviewed {
+            background-color: blue;
+            color: white;
+        }
+
+        .in-progress {
+            background-color: purple;
+            color: white;
+        }
+
+        .resolved {
+            background-color: green;
+            color: white;
+        }
+
+        .rejected {
+            background-color: red;
+            color: white;
+        }
+
+        button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #3f51b5;
+            color: white;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #283593;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo"><strong>MessFeed</strong></div>
+        <div>
+            <a href="#">Home</a>
+            <a href="#">Browse Reviews</a>
+            <a href="#">FAQ</a>
+            <a href="#">About Us</a>
+        </div>
+        <button class="signout">Sign Up/Login</button>
+    </div>
+    <div class="container">
+        <h1>Feedback Report</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feedback ID</th>
+                    <th>User Name</th>
+                    <th>Category</th>
+                    <th>Date & Time</th>
+                    <th>Feedback</th>
+                    <th>Status</th>
+                    <th>Admin Comments</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>#{{ feedback.feedback_id }}</td> <!-- Feedback ID updated -->
+                    <td>{{ feedback.reg_no }}</td> <!-- reg_no displayed -->
+                    <td>{{ feedback.category }}</td>
+                    <td>{{ feedback.date_time.strftime('%b %d, %Y, %H:%M') }}</td> <!-- Updated for date_time -->
+                    <td>{{ feedback.feedback }}</td>
+                    <td>
+                        <span class="status {{ feedback.status|lower }}">{{ feedback.status }}</span>
+                    </td>
+                    <td>{{ feedback.admin_comments or 'N/A' }}</td>
+                    <td>
+                        {% if feedback.status.lower() == 'pending' %}
+                            <!-- Only pending feedbacks can be updated -->
+                            <form action="{{ url_for('update_feedback') }}" method="POST" enctype="multipart/form-data">
+                                <!-- Hidden input for feedback_id -->
+                                <input type="hidden" name="feedback_id" value="{{ feedback.feedback_id }}">
+                    
+                                <input type="text" name="admin_comments" placeholder="Enter admin comments" required>
+                                
+                                <!-- Status is automatically set to 'Resolved' -->
+                                <input type="hidden" name="status" value="Resolved">
+                    
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        {% else %}
+                            <!-- Resolved feedbacks do not require update -->
+                            <span>Resolved</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" style="text-align:center;">No feedbacks available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <script>
+        // JavaScript to handle form submission via AJAX
+        document.querySelectorAll('form#updateFeedbackForm').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                const formData = new FormData(form);
+    
+                // Send an AJAX request to the Flask API
+                fetch('/api/update_feedback', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        // Show success alert and refresh the page (or stay on the same page)
+                        alert('Updated successfully!');
+                        // Optionally, you can reload the page to reflect the changes
+                        // location.reload();
+                    } else {
+                        alert('An error occurred: ' + (data.message || 'Unknown error'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while updating.');
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
