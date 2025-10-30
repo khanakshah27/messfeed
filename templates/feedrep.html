@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Feedback Report</title>
     <style>
         body {
-            background-color: #2D2A6E;
+            background-color: #2d2a6e;
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
@@ -64,29 +64,23 @@
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            position: relative;
         }
 
         th {
-            background-color: #B0A9D6;
+            background-color: #b0a9d6;
         }
 
         .status {
             padding: 5px 10px;
             border-radius: 5px;
+            display: inline-block;
+            min-width: 70px;
+            text-align: center;
         }
 
         .pending {
             background-color: orange;
-            color: white;
-        }
-
-        .reviewed {
-            background-color: blue;
-            color: white;
-        }
-
-        .in-progress {
-            background-color: purple;
             color: white;
         }
 
@@ -95,9 +89,34 @@
             color: white;
         }
 
-        .rejected {
-            background-color: red;
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #444;
             color: white;
+            font-weight: bold;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 100;
+            display: none;
+        }
+
+        .dropdown select {
+            width: 120px;
+            padding: 5px;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -134,24 +153,82 @@
                     <td>John Doe</td>
                     <td>Quality</td>
                     <td>March 25, 2025, 14:00</td>
-                    <td>.......</td>
+                    <td>....... </td>
                     <td><span class="status pending">Pending</span></td>
                     <td>Under review</td>
-                    <td><button>Update</button></td>
+                    <td>
+                        <button class="action-btn">Action</button>
+                        <div class="dropdown">
+                            <select>
+                                <option value="pending" selected>Pending</option>
+                                <option value="resolved">Resolved</option>
+                            </select>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>#102</td>
                     <td>John Doe</td>
                     <td>Hygiene</td>
                     <td>March 24, 2025, 10:30</td>
-                    <td>.......</td>
+                    <td>....... </td>
                     <td><span class="status resolved">Resolved</span></td>
                     <td>Dark mode implemented.</td>
-                    <td><button>View</button></td>
+                    <td>
+                        <button class="action-btn">Action</button>
+                        <div class="dropdown">
+                            <select>
+                                <option value="pending">Pending</option>
+                                <option value="resolved" selected>Resolved</option>
+                            </select>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                if (!dropdown.contains(e.target) && !dropdown.previousElementSibling.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        });
+
+        document.querySelectorAll('.action-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.stopPropagation(); 
+                const dropdown = this.nextElementSibling;
+             
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    if (d !== dropdown) d.style.display = 'none';
+                });
+             
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        document.querySelectorAll('.dropdown select').forEach(select => {
+            select.addEventListener('change', function () {
+                const row = this.closest('tr');
+                const statusSpan = row.querySelector('.status');
+                const adminCommentCell = row.cells[6]; 
+                if (this.value === 'resolved') {
+                    statusSpan.className = 'status resolved';
+                    statusSpan.textContent = 'Resolved';
+                    adminCommentCell.textContent = 'Issue has been resolved.';
+                } else {
+                    statusSpan.className = 'status pending';
+                    statusSpan.textContent = 'Pending';
+                    adminCommentCell.textContent = 'Under review';
+                }
+              
+                this.parentElement.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 
 </html>
