@@ -44,7 +44,7 @@
 
         .navbar a {
             text-decoration: none;
-            color: #666;
+            color: #333;
             font-weight: 500;
             transition: color 0.3s ease;
         }
@@ -194,10 +194,10 @@
     <div class="navbar">
         <div class="logo">MessFeed</div>
         <div class="nav-links">
-            <a href="#">Feedback Form</a>
-            <a href="#">My Feedbacks</a>
-            <a href="#">Feedback Report</a>
-            <a href="#">FAQ</a>
+            <a href="{{ url_for('regpg') }}">Feedback Form</a>
+            <a href="{{ url_for('userfeeds') }}">My Feedbacks</a>
+            <!-- <a href="{{ url_for('home') }}">Feedback Report</a> -->
+            <a href="{{ url_for('faq') }}">FAQ</a>
         </div>
         <a href="{{ url_for('home') }}"> <button class="signout">Sign Out</button> </a>
     </div>
@@ -321,7 +321,6 @@
                 alert("An error occurred while submitting feedback.\n"+error.message);
             });
         }
-
     </script>
 </body>
 
