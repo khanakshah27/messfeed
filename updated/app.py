@@ -9,12 +9,6 @@ from flask_bcrypt import Bcrypt
 ## pip install flask-bcrypt
 ## pip install psycopg2-binary
 
-# completed
-# user, admin login
-# feedback entry
-# show all feedback to admin <--
-#
-
 
 app = Flask(__name__)
 CORS(app)
@@ -130,13 +124,9 @@ def login_user():
         if not user:
             return jsonify({"success": False, "message": "User not found"}), 404
 
-        # Check hashed password
-        #if bcrypt.check_password_hash(user['password'], password):
-        #    return jsonify({"success": True, "redirect": "/regpg"})
-
         #check password
         if user['password'].strip() == password:
-            return jsonify({"success": True, "redirect": "/regpg"})
+            return jsonify({"success": True, "redirect": "/regpg", "email": user['email']})
         else:
             return jsonify({"success": False, "message": "Invalid password"}), 401
 
@@ -166,8 +156,7 @@ def login_admin():
             return jsonify({"success": False, "message": "Admin not found"}), 404
 
         if admin['password'].strip() == password:
-            #print("✅ Admin login successful:", username)
-            return jsonify({"success": True, "redirect": "/admin_home2"})
+            return jsonify({"success": True, "redirect": "/feedrep"})
         else:
             return jsonify({"success": False, "message": "Invalid password"}), 401
 
@@ -216,6 +205,33 @@ def update_feedback():
 def admin_add_comments():
     return render_template('admin_add_comments.html')
 
+@app.route('/userfeeds')
+def userfeeds():
+    return render_template('userfeeds.html')
+
+@app.route('/api/userfeedbacks', methods=['GET'])
+def get_user_feedbacks():
+    email = request.args.get('email')
+    if not email:
+        return jsonify({"error": "Email required"}), 400
+    conn = get_db()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    
+    # Step 1: Get reg_no from users table
+    cur.execute("SELECT reg_number FROM users WHERE email=%s;", (email,))
+    user = cur.fetchone()
+    if not user:
+        cur.close()
+        conn.close()
+        return jsonify({"error": "User not found"}), 404
+    reg_no = user['reg_number']
+    
+    # Step 2: Get feedbacks by reg_no
+    cur.execute("SELECT * FROM feedback WHERE registration_number=%s ORDER BY timestamp DESC;", (reg_no,))
+    feedbacks = cur.fetchall()
+    cur.close()
+
+
 @app.route('/category')
 def category():
     return render_template('category.html')
@@ -232,40 +248,3 @@ def feedback():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-"""
-curl -X POST http://127.0.0.1:5000/api/login_user \
--H "Content-Type: application/json" \
--d '{"email": "john.doe@gmail.com", "password": "p1"}'
-
-CREATE TABLE users (
-    reg_no CHAR(9) PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    block CHAR(20),
-    room_no INT,
-    mess_name VARCHAR(100),
-    mess_type VARCHAR(50),
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(30) NOT NULL
-);
-
-CREATE TABLE admins (
-    admin_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(30) NOT NULL
-);
-
-CREATE TABLE feedbacks (
-    feedback_id SERIAL PRIMARY KEY,
-    reg_no VARCHAR(9) REFERENCES users(reg_no) ON DELETE CASCADE,
-    category VARCHAR(100),
-    date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    feedback TEXT NOT NULL,
-    status VARCHAR(10) DEFAULT 'Pending' CHECK (status IN ('Pending', 'Resolved')),
-    admin_id INTEGER REFERENCES admins(admin_id) ON DELETE SET NULL,
-    admin_comments TEXT
-);
-
-
-"""
