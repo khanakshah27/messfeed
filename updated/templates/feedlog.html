@@ -101,8 +101,6 @@
                     <label><input type="checkbox">Remember me</label>
                     <a href="#">Forgot Password</a>
                 </div>
-                <!-- <a href="regpg.html"><button class="login-btn">Login</button></a>
-                <a href="{{ url_for('regpg') }}" class="login-btn">Login</a> -->
                 <button class="login-btn" onclick="loginUser()">Login</button>
             </div>
             <div class="login-section">
@@ -115,8 +113,6 @@
                     <label><input type="checkbox">Remember me</label>
                     <a href="#">Forgot Password</a>
                 </div>
-                 <!-- <a href="admin_home2.html"><button class="login-btn">Login</button></a>
-                 <a href="{{ url_for('admin_home2') }}" class="login-btn">Login</a>-->
                  <button class="login-btn" onclick="loginAdmin()">Login</button>
             </div>
         </div>
@@ -144,6 +140,7 @@
 
                 if (result.success) {
                     alert("Login successful!");
+                    localStorage.setItem('user_email', result.email);
                     window.location.href = result.redirect;  // Redirect on successful login
                 } else {
                     alert(result.message); // Show error
