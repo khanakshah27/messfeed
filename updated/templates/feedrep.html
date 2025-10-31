@@ -125,7 +125,7 @@
             <a href="#">FAQ</a>
             <a href="#">About Us</a>
         </div>
-        <button class="signout">Sign Up/Login</button>
+        <a href="{{ url_for('feedlog') }}"><button class="signout" style="color:white; background-color: #2D2A6E">Sign Up/Login</button></a>
     </div>
     <div class="container">
         <h1>Feedback Report</h1>
@@ -145,10 +145,10 @@
             <tbody>
                 {% for feedback in feedbacks %}
                 <tr>
-                    <td>#{{ feedback.feedback_id }}</td> <!-- Feedback ID updated -->
-                    <td>{{ feedback.reg_no }}</td> <!-- reg_no displayed -->
+                    <td>#{{ feedback.feedback_id }}</td>
+                    <td>{{ feedback.reg_no }}</td> 
                     <td>{{ feedback.category }}</td>
-                    <td>{{ feedback.date_time.strftime('%b %d, %Y, %H:%M') }}</td> <!-- Updated for date_time -->
+                    <td>{{ feedback.date_time.strftime('%b %d, %Y, %H:%M') }}</td>
                     <td>{{ feedback.feedback }}</td>
                     <td>
                         <span class="status {{ feedback.status|lower }}">{{ feedback.status }}</span>
@@ -158,18 +158,14 @@
                         {% if feedback.status.lower() == 'pending' %}
                             <!-- Only pending feedbacks can be updated -->
                             <form action="{{ url_for('update_feedback') }}" method="POST" enctype="multipart/form-data">
-                                <!-- Hidden input for feedback_id -->
                                 <input type="hidden" name="feedback_id" value="{{ feedback.feedback_id }}">
-                    
                                 <input type="text" name="admin_comments" placeholder="Enter admin comments" required>
-                                
                                 <!-- Status is automatically set to 'Resolved' -->
                                 <input type="hidden" name="status" value="Resolved">
                     
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         {% else %}
-                            <!-- Resolved feedbacks do not require update -->
                             <span>Resolved</span>
                         {% endif %}
                     </td>
@@ -200,10 +196,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.message) {
-                        // Show success alert and refresh the page (or stay on the same page)
                         alert('Updated successfully!');
-                        // Optionally, you can reload the page to reflect the changes
-                        // location.reload();
                     } else {
                         alert('An error occurred: ' + (data.message || 'Unknown error'));
                     }
